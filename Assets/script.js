@@ -1,13 +1,67 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-$(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
+let timeDisplay = $("#time-display");
+let container = $(".container");
+
+let hours = [
+  {
+    hour: "8",
+    task: "",
+  },
+  {
+    hour: "9",
+    task: "",
+  },
+  {
+    hour: "10",
+    task: "",
+  },
+  {
+    hour: "11",
+    task: "",
+  },
+  {
+    hour: "12",
+    task: "",
+  },
+  {
+    hour: "13",
+    task: "",
+  },
+  {
+    hour: "14",
+    task: "",
+  },
+  {
+    hour: "15",
+    task: "",
+  },
+  {
+    hour: "16",
+    task: "",
+  },
+  {
+    hour: "17",
+    task: "",
+  },
+];
+
+function addListener() {
+  const save = document.getElementsByClassName("saveBtn");
+  for (let i = 0; i < saveButtons.length; i++) {
+    save[i].addEventListener("click", function (event) {
+      event.preventDefault();
+      saveTask(event.target.previousSibling.value, i);
+    });
+  }
+}
+function currentTime() {
+  var present = dayjs().format("MMM DD [at] hh:mm:ss a");
+  timeDisplayEl.text(present);
+} 
+  
+
   //
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
